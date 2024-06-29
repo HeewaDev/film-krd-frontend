@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import "./home.css"; // Ensure correct CSS import
+import "./home.css";
 import DefaultLayout from "../components/DefaultLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { getFilms } from "../Redux/Actions/film.action";
-import { Card, Col, Row, Avatar, Button } from "antd";
+import { Card, Col, Row, Avatar } from "antd";
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import SearchComponent from "../components/Search";
+import ColorSchemesExample from "../components/DefaultLayout";
+import ResponsiveAppBar from "../components/DefaultLayout";
 const { Meta } = Card;
 
 const Home = () => {
@@ -27,10 +29,11 @@ const Home = () => {
       film.title.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .slice(0, 8); // Limit to 8 films
-console.log(films)
+
   return (
-    <DefaultLayout showSearchForm searchTerm={searchTerm} handleSearchChange={handleSearchChange}>
+  
       <div>
+        <ResponsiveAppBar />
         <SearchComponent />
         <Row
           justify="center"
@@ -43,28 +46,33 @@ console.log(films)
           ) : (
             filteredFilms.map((film) => (
               <Col
-                xs={24} // Full width on extra small screens
-                sm={12} // 2 columns on small screens
-                md={8} // 3 columns on medium screens
-                lg={6} // 4 columns on large screens
-                xl={6} // 4 columns on extra large screens
+                xs={24}
+                sm={12}
+                md={8}
+                lg={6}
+                xl={6}
                 key={film.id}
-                style={{ marginBottom: "16px" }} // Adjust spacing as per your design
+                style={{ marginBottom: "16px" }}
               >
                 <Card
                   hoverable
-                  cover={<img alt={film.title} src={film.posterimageurl} />}
+                  className="card-container"
+                  cover={
+                    <div className="card-cover">
+                      <img alt={film.title} src={film.posterimageurl} />
+                    </div>
+                  }
                 >
                   <Meta
+                    className="card-meta"
                     avatar={<Avatar src={film.posterimageurl} />}
                     title={film.title}
                     description={`Genre: ${film.genre} Duration: ${film.duration} Minutes`}
-                   
                   />
-                  <div style={{ marginTop: "10px", textAlign: "end" }}>
-                    <Button type="primary">
-                      <Link to={`/films/${film.id}`}>View Details</Link>
-                    </Button>
+                  <div className="card-actions">
+                    <button className="btn">
+                      <a href={`/films/${film.id}`}><span>View Details</span></a>
+                    </button>
                   </div>
                 </Card>
               </Col>
@@ -72,7 +80,7 @@ console.log(films)
           )}
         </Row>
       </div>
-    </DefaultLayout>
+   
   );
 };
 

@@ -1,124 +1,167 @@
-/* eslint-disable */
-import './DefaultLayout.css';
-import { useState } from "react";
-import {
-  Container,
-  Nav,
-  Navbar,
-  NavDropdown,
-  Form,
-  Button,
-} from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
 
-function DefaultLayout({ children, showSearchForm, searchTerm, handleSearchChange }) {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+const pages = [
+  { label: 'Home', href: '/' },
+  { label: 'Films', href: '/films' },
+  { label: 'Companies', href: '/companies' },
+  { label: 'Casts', href: '/casts' }
+];
 
-  const toggleNav = () => {
-    setIsNavOpen(!isNavOpen);
+function ResponsiveAppBar() {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
   };
 
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   return (
-    <div>
-      <Navbar
-        expand="lg"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 75%, rgba(0,212,255,1) 100%",
-        }}
-      >
-        <Container>
-          <Navbar.Brand>
-            <Link
-              to="/"
-              style={{
-                color: "white",
-                textDecoration: "none",
-                fontSize: "2rem",
+    <AppBar position="static" sx={{ bgcolor: 'transparent', boxShadow: 'none' }}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.1rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            filmkrd
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
               }}
             >
-              FilmsKrd
-            </Link>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={toggleNav} />
-          <Navbar.Collapse id="basic-navbar-nav" className={isNavOpen ? "show" : ""}>
-            <Nav className="me-auto">
-              {!isHomePage && (
-                <Nav.Link
-                  href="/"
-                  style={{
-                    color: "white",
-                    textDecoration: "none",
-                    fontSize: "2rem",
-                  }}
-                >
-                  Home
-                </Nav.Link>
-              )}
+              {pages.map((page) => (
+                <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                  <Typography
+                    component="a"
+                    href={page.href}
+                    textAlign="center"
+                    sx={{
+                      color: 'inherit',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    {page.label}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
 
-              <Nav.Link
-                href="/films"
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                  fontSize: "2rem",
-                }}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page.label}
+                href={page.href}
+                onClick={handleCloseNavMenu}
+                sx={{ mx: 2, color: 'inherit' }}
               >
-                Films
-              </Nav.Link>
-              <Nav.Link
-                href="/companies"
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                  fontSize: "2rem",
-                }}
-              >
-                Companies
-              </Nav.Link>
-              <Nav.Link
-                href="/casts"
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                  fontSize: "2rem",
-                }}
-              >
-                Casts
-              </Nav.Link>
-            </Nav>
-            {showSearchForm && (
-              <Form className="d-flex">
-                <Form.Control
-                  type="search"
-                  placeholder="Search"
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-                  aria-label="Search"
-                />
-              </Form>
-            )}
-            <Nav>
-              <NavDropdown title="User" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+                {page.label}
+              </Button>
+            ))}
+          </Box>
 
-      <div className="content">{children}</div>
-
-      <div className="footer text-center">
-        <hr />
-        {/* Your footer content */}
-      </div>
-    </div>
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="User Avatar" src="/static/images/avatar.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Profile</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Account</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Dashboard</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 }
 
-export default DefaultLayout;
+export default ResponsiveAppBar;

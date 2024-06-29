@@ -1,11 +1,11 @@
 /* eslint-disable */
 import React from "react"
-import Header from "../components/header"
+import DefaultLayout from "../components/DefaultLayout";
 
 export default function Companies () {
     return (
         <div>
-            <Header />
+            <DefaultLayout />
             <h1>I'm company page</h1>
         </div>
     )
