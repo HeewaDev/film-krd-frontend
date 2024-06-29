@@ -17,6 +17,7 @@ const pages = [
   { label: 'Home', href: '/' },
   { label: 'Films', href: '/films' },
   { label: 'Companies', href: '/companies' },
+  { label: 'Shooting Locations', href: '/shootinglocations' },
   { label: 'Casts', href: '/casts' }
 ];
 
@@ -41,7 +42,11 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: 'transparent', boxShadow: 'none' }}>
+    <AppBar position="static" sx={{ 
+      bgcolor: 'rgba(0, 0, 0, 0.5)',
+       boxShadow: 'none'  ,
+          backdropFilter: 'blur(10px)',
+     }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -57,6 +62,7 @@ function ResponsiveAppBar() {
               letterSpacing: '.1rem',
               color: 'inherit',
               textDecoration: 'none',
+         
             }}
           >
             filmkrd

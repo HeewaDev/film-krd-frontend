@@ -7,7 +7,8 @@ import { Card, Col, Row, Avatar } from "antd";
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import SearchComponent from "../components/Search";
-import ColorSchemesExample from "../components/DefaultLayout";
+import Slideshow from "../components/slideshow";
+import HomeText from "../components/HomeText"; // Import the HomeText component
 import ResponsiveAppBar from "../components/DefaultLayout";
 const { Meta } = Card;
 
@@ -30,57 +31,65 @@ const Home = () => {
     )
     .slice(0, 8); // Limit to 8 films
 
+  // Prepare slides data for Slideshow component
+  const slides = filteredFilms.map((film) => ({
+    id: film.id,
+    image: film.wallpaper, // Assuming posterimageurl is the correct property name
+    title: film.title,
+    description: `Genre: ${film.genre} Duration: ${film.duration} Minutes`
+  }));
+
   return (
-  
-      <div>
-        <ResponsiveAppBar />
-        <SearchComponent />
-        <Row
-          justify="center"
-          gutter={[16, 16]} // Adjust gutter as per your design
-          className="mt-5"
-          style={{ padding: "0 16px" }} // Adjust padding as per your design
-        >
-          {loading ? (
-            <Spinner />
-          ) : (
-            filteredFilms.map((film) => (
-              <Col
-                xs={24}
-                sm={12}
-                md={8}
-                lg={6}
-                xl={6}
-                key={film.id}
-                style={{ marginBottom: "16px" }}
-              >
-                <Card
-                  hoverable
-                  className="card-container"
-                  cover={
-                    <div className="card-cover">
-                      <img alt={film.title} src={film.posterimageurl} />
-                    </div>
-                  }
-                >
-                  <Meta
-                    className="card-meta"
-                    avatar={<Avatar src={film.posterimageurl} />}
-                    title={film.title}
-                    description={`Genre: ${film.genre} Duration: ${film.duration} Minutes`}
-                  />
-                  <div className="card-actions">
-                    <button className="btn">
-                      <a href={`/films/${film.id}`}><span>View Details</span></a>
-                    </button>
+    <div>
+      <ResponsiveAppBar />
+      <SearchComponent />
+            <HomeText /> {/* Render the HomeText component */}
+      <Slideshow slides={slides} /> {/* Pass slides data to Slideshow component */}
+      <Row
+        justify="center"
+        gutter={[16, 16]} // Adjust gutter as per your design
+        className="mt-5"
+        style={{ padding: "0 16px" }} // Adjust padding as per your design
+      >
+        {loading ? (
+          <Spinner />
+        ) : (
+          filteredFilms.map((film) => (
+            <Col
+              xs={24}
+              sm={12}
+              md={8}
+              lg={6}
+              xl={6}
+              key={film.id}
+              style={{ marginBottom: "16px" }}
+            >
+              <Card
+                hoverable
+                className="card-container"
+                cover={
+                  <div className="card-cover">
+                    <img alt={film.title} src={film.posterimageurl} />
                   </div>
-                </Card>
-              </Col>
-            ))
-          )}
-        </Row>
-      </div>
-   
+                }
+              >
+                <Meta
+                  className="card-meta"
+                  avatar={<Avatar src={film.posterimageurl} />}
+                  title={film.title}
+                  description={`Genre: ${film.genre} Duration: ${film.duration} Minutes`}
+                />
+                <div className="card-actions">
+                  <button className="btn">
+                    <a href={`/films/${film.id}`}><span>View Details</span></a>
+                  </button>
+                </div>
+              </Card>
+            </Col>
+          ))
+        )}
+      </Row>
+    </div>
   );
 };
 

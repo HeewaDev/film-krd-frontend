@@ -1,0 +1,33 @@
+.home-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 90vh;
+    height: 70vh;
+    margin: 0 auto;
+    margin-top: 10px; /* Correct unit */
+    margin-bottom: 10px; /* Correct unit */
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .home-img {
+    margin-top: 10vh;
+    width: 10vh;
+    height: 10vh;
+    object-fit: cover;
+  }
+  
+  .home-text-container h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  
+  .home-text-container p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #ffffff;
+  }
+  
