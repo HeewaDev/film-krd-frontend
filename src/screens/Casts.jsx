@@ -31,7 +31,7 @@ const Casts = () => {
                 height: '100%',
                 maxWidth: 345,
               }}>
-                {cast.img && cast.img.length > 0 && (
+                {cast.img.length > 0 && (
                   <CardMedia
                     sx={{ height: 140 }}
                     image={cast.img[0]}
