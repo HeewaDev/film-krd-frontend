@@ -1,6 +1,56 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
+import { styled, alpha } from '@mui/material/styles';
+
+const Search = styled('div')(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  position: 'relative',
+  width: '25%', // Adjust width as needed
+  margin: '0 auto', // Center horizontally
+  marginTop: '20px', // Adjust margin as needed
+  marginBottom: '20px', // Adjust margin as needed
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  [theme.breakpoints.up('sm')]: {
+    width: '35%',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  width: '100%',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
+}));
 
 const SearchComponent = () => {
   const [query, setQuery] = useState('');
@@ -24,14 +74,26 @@ const SearchComponent = () => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search films..."
-      />
-      <button onClick={handleSearch}>Search</button>
+    <div className="search-container"> {/* Apply the search-container class here */}
+      <Search>
+        <SearchIconWrapper>
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Search films..."
+          inputProps={{ 'aria-label': 'search' }}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <IconButton
+          onClick={handleSearch}
+          size="large"
+          edge="end"
+          aria-label="search"
+          sx={{ ml: 1 }}
+        >
+          <SearchIcon />
+        </IconButton>
+      </Search>
 
       {/* Display search results */}
       <div>
@@ -44,7 +106,7 @@ const SearchComponent = () => {
             </div>
           ))
         ) : (
-          <p>No results found</p>
+          <p></p>
         )}
       </div>
     </div>
