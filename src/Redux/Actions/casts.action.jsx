@@ -7,7 +7,7 @@ export const GetCasts = () => async (dispatch) => {
     dispatch ({type: 'LOADING', payload: true})
 
     try {
-        const {casts} = await axios.get('localhost:7000/casts')
+        const {casts} = await axios.get('http://localhost:7000/casts')
         dispatch({type: 'GET_ALL_CASTS', payload: casts})
         dispatch({type: 'LOADING', payload: false})
     } catch (error) {
@@ -28,7 +28,7 @@ export const AddCasts = (ReqObj) => async (dispatch) => {
 dispatch({type: "LOADING", payload: true})
 
 try {
-    await axios.post("localhost:7000/casts", ReqObj)
+    await axios.post("http://localhost:7000/casts", ReqObj)
 
     dispatch({type: "CREATE_CASTS", payload: true})
     message.success('New Cast Added Succefully')
@@ -51,7 +51,7 @@ export const EditCasts = (ReqObj) => async(dispatch) =>{
 
     try {
 
-        await axios.post("localhost:7000/casts", ReqObj)
+        await axios.post("http://localhost:7000/casts", ReqObj)
         dispatch({type: "Loading", payload: false})
 
         message.success('Cast Editted Succesfully')
@@ -67,7 +67,7 @@ export const DeleteCasts = (ReqObj) => async (dispatch) => {
 
 
     try {
-        await axios.delete("localhost:7000/casts", ReqObj)
+        await axios.delete("http://localhost:7000/casts", ReqObj)
         dispatch({type: "LOADING", payload: false})
 
         message.success('Succesfully deleted a cast')

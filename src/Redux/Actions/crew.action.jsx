@@ -26,7 +26,7 @@ export const AddCrew = (ReqObj) => async (dispatch) => {
 dispatch({type: "LOADING", payload: true})
 
 try {
-    await axios.post("localhost:7000/crew", ReqObj)
+    await axios.post("http://localhost:7000/crew", ReqObj)
 
     dispatch({type: "CREATE_CREW", payload: true})
     message.success('New Crew Added Succefully')
@@ -49,7 +49,7 @@ export const EditCrew = (ReqObj) => async(dispatch) =>{
 
     try {
 
-        await axios.post("localhost:7000/crew", ReqObj)
+        await axios.post("http://localhost:7000/crew", ReqObj)
         dispatch({type: "Loading", payload: false})
 
         message.success('Crew Editted Succesfully')
@@ -65,7 +65,7 @@ export const DeleteCrew = (ReqObj) => async (dispatch) => {
 
 
     try {
-        await axios.delete("localhost:7000/crew", ReqObj)
+        await axios.delete("http://localhost:7000/crew", ReqObj)
         dispatch({type: "LOADING", payload: false})
 
         message.success('Succesfully deleted a crew')

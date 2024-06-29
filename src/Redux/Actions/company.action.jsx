@@ -7,7 +7,7 @@ export const GetCompanies = () => async (dispatch) => {
     dispatch ({type: 'LOADING', payload: true})
 
     try {
-        const {Companies} = await axios.get('localhost:7000/companies')
+        const {Companies} = await axios.get('http://localhost:7000/companies')
         dispatch({type: 'GET_ALL_COMPANIES', payload: Companies})
         dispatch({type: 'LOADING', payload: false})
 
@@ -25,7 +25,7 @@ export const AddCompany = (ReqObj) => async (dispatch) => {
 dispatch({type: "LOADING", payload: true})
 
 try {
-    await axios.post("localhost:7000/companies", ReqObj)
+    await axios.post("http://localhost:7000/companies", ReqObj)
 
     dispatch({type: "CREATE_COMPANY", payload: true})
     message.success('New Company Added Succefully')
@@ -48,7 +48,7 @@ export const EditCompany = (ReqObj) => async(dispatch) =>{
 
     try {
 
-        await axios.post("localhost:7000/companies", ReqObj)
+        await axios.post("http://localhost:7000/companies", ReqObj)
         dispatch({type: "Loading", payload: false})
 
         message.success('Company Editted Succesfully')
@@ -64,7 +64,7 @@ export const DeleteCompany = (ReqObj) => async (dispatch) => {
 
 
     try {
-        await axios.delete("localhost:7000/companies", ReqObj)
+        await axios.delete("http://localhost:7000/companies", ReqObj)
         dispatch({type: "LOADING", payload: false})
 
         message.success('Succesfully deleted a company')

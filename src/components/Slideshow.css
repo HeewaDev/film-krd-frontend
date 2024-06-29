@@ -1,0 +1,38 @@
+/* src/components/Slideshow.css */
+
+.slideshow-container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .slide {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  
+  .slide img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .slide-content {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .slide-content h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .slide-content p {
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
+  }
+  
