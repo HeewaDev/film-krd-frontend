@@ -2,20 +2,22 @@
 import { message } from "antd";
 import axios from "axios";
 
-export const GetCompanies = () => async (dispatch) => {
 
-    dispatch ({type: 'LOADING', payload: true})
+export const getAllCompanies = () => async (dispatch) => {
+  dispatch({ type: 'LOADING', payload: true });
 
-    try {
-        const {Companies} = await axios.get('http://localhost:7000/companies')
-        dispatch({type: 'GET_ALL_COMPANIES', payload: Companies})
-        dispatch({type: 'LOADING', payload: false})
+  try {
+    const response = await axios.get('http://localhost:7000/companies');
+    dispatch({ type: 'GET_ALL_COMPANIES', payload: response.data });
+    dispatch({ type: 'LOADING', payload: false });
+  } catch (error) {
+    message.error('Error getting companies');
+    dispatch({ type: 'LOADING', payload: false });
+  }
+};
 
-    } catch (error) {
-        message.error('error getting companies')
-        dispatch({type: "LOADING", payload: false})
-    }
-}
+// Other actions (AddCompany, EditCompany, DeleteCompany) remain unchanged
+
 
 
 

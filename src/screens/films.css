@@ -1,0 +1,51 @@
+/* films.css */
+
+.cardRoot {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    max-width: 345px; /* Adjust max-width as needed */
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .cardRoot:hover {
+    transform: translateY(-5px);
+  }
+  
+  .cardMedia {
+    height: 140px; /* Adjust height of the media container */
+    background-size: cover;
+  }
+  
+  .cardContent {
+    flex-grow: 1;
+  }
+  
+  .cardTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .cardDescription {
+    margin-top: 8px;
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 768px) {
+    .cardRoot {
+      max-width: 300px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .cardRoot {
+      max-width: 250px;
+    }
+  }
+  

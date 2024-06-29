@@ -63,7 +63,7 @@ console.log(films)
                   />
                   <div style={{ marginTop: "10px", textAlign: "end" }}>
                     <Button type="primary">
-                      <Link to={`/films/${film.id}`}>View Details</Link>
+                      <Link to={`/film/${film.id}`}>View Details</Link>
                     </Button>
                   </div>
                 </Card>

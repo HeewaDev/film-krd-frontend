@@ -1,5 +1,3 @@
-// src/actions/filmActions.js
-
 import { message } from "antd";
 import axios from "axios";
 
@@ -16,6 +14,34 @@ export const getFilms = () => async (dispatch) => {
     dispatch({ type: 'LOADING', payload: false });
   }
 };
+
+export const getFilmById = (id) => async (dispatch) => {
+  dispatch({ type: 'LOADING', payload: true });
+
+  try {
+    const response = await axios.get(`http://localhost:7000/films/${id}`);
+    const film = response.data; 
+    dispatch({ type: 'GET_FILM_BY_ID', payload: film });
+    dispatch({ type: 'LOADING', payload: false });
+  } catch (error) {
+    console.error(`Error getting Film with ID ${id}:`, error);
+    dispatch({ type: 'LOADING', payload: false });
+  }
+};
+
+export const getCastsByFilmId = (filmId) => async (dispatch) => {
+    dispatch({ type: 'LOADING', payload: true });
+  
+    try {
+      const response = await axios.get(`http://localhost:7000/film_casts?film_id=${filmId}`);
+      const casts = response.data; 
+      dispatch({ type: 'GET_CASTS_BY_FILM_ID', payload: casts });
+      dispatch({ type: 'LOADING', payload: false });
+    } catch (error) {
+      console.error(`Error getting Casts for Film ID ${filmId}:`, error);
+      dispatch({ type: 'LOADING', payload: false });
+    }
+  };
 
 export const addFilm = (reqObj) => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });

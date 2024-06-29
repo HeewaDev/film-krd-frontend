@@ -8,19 +8,29 @@ const SearchComponent = () => {
   const navigate = useNavigate();
 
   const handleSearch = async () => {
-    if (!query) return; // Do not fetch data if query is empty
+    if (!query.trim()) return; // Do not fetch data if query is empty or only whitespace
+
     try {
-      const response = await axios.post(`http://localhost:7000/films/?q=${query}`);
-      setResults(response.data.films || []); // Ensure results are set correctly
-      console.log(response.data.films);
+      const response = await axios.get(`http://localhost:7000/films/search?q=${encodeURIComponent(query)}`);
+      setResults(response.data || []); // Set results to the data returned by the backend
     } catch (error) {
       console.error('Error fetching search results:', error);
-      setResults([]); // Ensure results are set to an empty array on error
+      setResults([]); // Set results to an empty array on error
     }
   };
 
-  const handleFilmClick = (query) => {
-    navigate(`/films/${query}`);
+  const handleInputChange = (event) => {
+    setQuery(event.target.value);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  const handleFilmClick = (filmId) => {
+    navigate(`/films/${filmId}`);
   };
 
   return (
@@ -28,7 +38,8 @@ const SearchComponent = () => {
       <input
         type="text"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={handleInputChange}
+        onKeyPress={handleKeyPress}
         placeholder="Search films..."
       />
       <button onClick={handleSearch}>Search</button>
