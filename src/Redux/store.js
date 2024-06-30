@@ -6,6 +6,8 @@ import {CrewReducer} from './Reducers/crew.reducer'
 import {CastsReducer} from './Reducers/casts.reducer'
 import {CompanyReducer} from './Reducers/company.reducer'
 import FilmsReducer from "./Reducers/film.reducer";
+import ShootingLocations from "./Reducers/shootingLocations.reducer";
+import ShootingLocationsReducer from "./Reducers/shootingLocations.reducer";
 // Enhancers for Redux DevTools Extension
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -13,6 +15,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // Example: import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
+  ShootingLocationsReducer,
  FilmsReducer,
   CrewReducer,
   CastsReducer,
