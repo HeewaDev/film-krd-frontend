@@ -6,7 +6,7 @@ export const getShootingLocations = () => async (dispatch) => {
   dispatch({ type: 'LOADING_SHOOTING_LOCATIONS', payload: true });
 
   try {
-    const response = await axios.get('http://localhost:7000/shooting_locations');
+    const response = await axios.get('http://localhost:7000/shooting-locations');
     const { data } = response; // Assuming shooting locations are directly in response.data
     dispatch({ type: 'GET_ALL_SHOOTING_LOCATIONS', payload: data });
     dispatch({ type: 'LOADING_SHOOTING_LOCATIONS', payload: false });
