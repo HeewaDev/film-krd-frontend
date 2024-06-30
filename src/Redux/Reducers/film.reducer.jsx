@@ -7,7 +7,7 @@ const initialState = {
   film: null,
   loading: false,
   error: null,
-  cast: [], // Initialize casts state
+  casts: [], // Initialize casts state
 };
 
 const FilmsReducer = (state = initialState, action) => {
