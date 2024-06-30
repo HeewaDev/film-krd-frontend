@@ -8,7 +8,8 @@ import Crew from './screens/Crew';
 import NotFound from './screens/NotFound';
 import Film from './screens/Film';
 import Cast from './screens/Cast';
-
+import Shootinglocations from './screens/shootinglocations';
+Shootinglocations
 
 
 
@@ -25,6 +26,8 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/films/:id" element={<Film  />} />
         <Route path="/casts/:id" element={<Cast  />} />
+        <Route path="/shootinglocations" element={<Shootinglocations />} />
+
       </Routes>
     </BrowserRouter>
   );

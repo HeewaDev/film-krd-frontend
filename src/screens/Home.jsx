@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import "./home.css"; // Ensure correct CSS import
+import "./home.css";
 import DefaultLayout from "../components/DefaultLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { getFilms } from "../Redux/Actions/film.action";
-import { Card, Col, Row, Avatar, Button } from "antd";
+import { Card, Col, Row, Avatar } from "antd";
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import SearchComponent from "../components/Search";
+import Slideshow from "../components/slideshow";
+import HomeText from "../components/HomeText"; // Import the HomeText component
+import ResponsiveAppBar from "../components/DefaultLayout";
 const { Meta } = Card;
 
 const Home = () => {
@@ -27,52 +30,66 @@ const Home = () => {
       film.title.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .slice(0, 8); // Limit to 8 films
-console.log(films)
+
+  // Prepare slides data for Slideshow component
+  const slides = filteredFilms.map((film) => ({
+    id: film.id,
+    image: film.wallpaper, // Assuming posterimageurl is the correct property name
+    title: film.title,
+    description: `Genre: ${film.genre} Duration: ${film.duration} Minutes`
+  }));
+
   return (
-    <DefaultLayout showSearchForm searchTerm={searchTerm} handleSearchChange={handleSearchChange}>
-      <div>
-        <SearchComponent />
-        <Row
-          justify="center"
-          gutter={[16, 16]} // Adjust gutter as per your design
-          className="mt-5"
-          style={{ padding: "0 16px" }} // Adjust padding as per your design
-        >
-          {loading ? (
-            <Spinner />
-          ) : (
-            filteredFilms.map((film) => (
-              <Col
-                xs={24} // Full width on extra small screens
-                sm={12} // 2 columns on small screens
-                md={8} // 3 columns on medium screens
-                lg={6} // 4 columns on large screens
-                xl={6} // 4 columns on extra large screens
-                key={film.id}
-                style={{ marginBottom: "16px" }} // Adjust spacing as per your design
-              >
-                <Card
-                  hoverable
-                  cover={<img alt={film.title} src={film.posterimageurl} />}
-                >
-                  <Meta
-                    avatar={<Avatar src={film.posterimageurl} />}
-                    title={film.title}
-                    description={`Genre: ${film.genre} Duration: ${film.duration} Minutes`}
-                   
-                  />
-                  <div style={{ marginTop: "10px", textAlign: "end" }}>
-                    <Button type="primary">
-                      <Link to={`/film/${film.id}`}>View Details</Link>
-                    </Button>
+    <div>
+      <ResponsiveAppBar />
+      <SearchComponent />
+            <HomeText /> {/* Render the HomeText component */}
+      <Slideshow slides={slides} /> {/* Pass slides data to Slideshow component */}
+      <Row
+        justify="center"
+        gutter={[16, 16]} // Adjust gutter as per your design
+        className="mt-5"
+        style={{ padding: "0 16px" }} // Adjust padding as per your design
+      >
+        {loading ? (
+          <Spinner />
+        ) : (
+          filteredFilms.map((film) => (
+            <Col
+              xs={24}
+              sm={12}
+              md={8}
+              lg={6}
+              xl={6}
+              key={film.id}
+              style={{ marginBottom: "16px" }}
+            >
+              <Card
+                hoverable
+                className="card-container"
+                cover={
+                  <div className="card-cover">
+                    <img alt={film.title} src={film.posterimageurl} />
                   </div>
-                </Card>
-              </Col>
-            ))
-          )}
-        </Row>
-      </div>
-    </DefaultLayout>
+                }
+              >
+                <Meta
+                  className="card-meta"
+                  avatar={<Avatar src={film.posterimageurl} />}
+                  title={film.title}
+                  description={`Genre: ${film.genre} Duration: ${film.duration} Minutes`}
+                />
+                <div className="card-actions">
+                  <button className="btn">
+                    <a href={`/films/${film.id}`}><span>View Details</span></a>
+                  </button>
+                </div>
+              </Card>
+            </Col>
+          ))
+        )}
+      </Row>
+    </div>
   );
 };
 

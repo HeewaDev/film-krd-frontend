@@ -37,7 +37,7 @@ const Film = () => {
       <Typography variant="body1"><strong>Duration:</strong> {film.duration} minutes</Typography>
       {/* Add more details as needed */}
       <Typography variant="h4">Casts</Typography>
-      {casts.length === 0 ? (
+      {casts?.length === 0 ? (
         <Typography variant="body1">No casts found for this film.</Typography>
       ) : (
         <ul>
