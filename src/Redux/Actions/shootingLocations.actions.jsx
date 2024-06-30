@@ -21,7 +21,7 @@ export const getShootingLocationById = (id) => async (dispatch) => {
   dispatch({ type: 'LOADING_SHOOTING_LOCATIONS', payload: true });
 
   try {
-    const response = await axios.get(`http://localhost:7000/shooting_locations/${id}`);
+    const response = await axios.get(`http://localhost:7000/shooting-locations/${id}`);
     const location = response.data;
     dispatch({ type: 'GET_SHOOTING_LOCATION_BY_ID', payload: location });
     dispatch({ type: 'LOADING_SHOOTING_LOCATIONS', payload: false });
@@ -36,7 +36,7 @@ export const addShootingLocation = (reqObj) => async (dispatch) => {
   dispatch({ type: 'LOADING_SHOOTING_LOCATIONS', payload: true });
 
   try {
-    await axios.post('http://localhost:7000/shooting_locations', reqObj);
+    await axios.post('http://localhost:7000/shooting-locations', reqObj);
     dispatch({ type: 'CREATE_SHOOTING_LOCATION', payload: true });
     message.success('New shooting location added successfully');
     dispatch({ type: 'LOADING_SHOOTING_LOCATIONS', payload: false });
@@ -51,7 +51,7 @@ export const editShootingLocation = (reqObj) => async (dispatch) => {
   dispatch({ type: 'LOADING_SHOOTING_LOCATIONS', payload: true });
 
   try {
-    await axios.put(`http://localhost:7000/shooting_locations/${reqObj.id}`, reqObj);
+    await axios.put(`http://localhost:7000/shooting-locations/${reqObj.id}`, reqObj);
     dispatch({ type: 'UPDATE_SHOOTING_LOCATION', payload: reqObj });
     message.success('Shooting location edited successfully');
     dispatch({ type: 'LOADING_SHOOTING_LOCATIONS', payload: false });
@@ -66,7 +66,7 @@ export const deleteShootingLocation = (id) => async (dispatch) => {
   dispatch({ type: 'LOADING_SHOOTING_LOCATIONS', payload: true });
 
   try {
-    await axios.delete(`http://localhost:7000/shooting_locations/${id}`);
+    await axios.delete(`http://localhost:7000/shooting-locations/${id}`);
     dispatch({ type: 'DELETE_SHOOTING_LOCATION', payload: id });
     message.success('Shooting location deleted successfully');
     dispatch({ type: 'LOADING_SHOOTING_LOCATIONS', payload: false });
