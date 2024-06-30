@@ -41,8 +41,7 @@ const Film = () => {
         <Typography variant="body1">No casts found for this film.</Typography>
       ) : (
         <ul>
-          console.log()
-          {casts.map((cast) => (
+          {casts?.map((cast) => (
             <li key={cast.role}>
               <Typography variant="body1"><strong>{cast.role}</strong></Typography>
             </li>

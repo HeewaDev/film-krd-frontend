@@ -22,7 +22,7 @@ const Casts = () => {
         <CircularProgress />
       ) : (
         <Grid container spacing={3}>
-          {casts.map(cast => (
+          {casts?.map(cast => (
             <Grid item xs={12} sm={6} md={4} key={cast.id}>
               <Card sx={{
                 display: 'flex',

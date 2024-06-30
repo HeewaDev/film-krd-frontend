@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { Card,  } from "@mui/material";
 import { getFilms } from "../Redux/Actions/film.action";
 import "./films.css"; // Import the CSS file (optional)
 import  { useState, useEffect } from "react";
-import {  Col, Row, Avatar, Select, Input } from "antd";
+import {  Col, Row, Avatar, Select, Input ,Card} from "antd";
 
 import Spinner from "../components/Spinner";
 import ResponsiveAppBar from "../components/DefaultLayout";
