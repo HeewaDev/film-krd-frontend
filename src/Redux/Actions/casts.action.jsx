@@ -1,7 +1,7 @@
 import { message } from "antd";
 import axios from "axios";
 
-export const GetCasts = () => async (dispatch) => {
+export const getCasts = () => async (dispatch) => {
     dispatch({ type: 'LOADING', payload: true });
 
     try {
