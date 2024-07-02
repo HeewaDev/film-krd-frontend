@@ -15,20 +15,24 @@ export const getCasts = () => async (dispatch) => {
 }
 
 
-export const getCastById = (id) => async (dispatch) => {
-    dispatch({ type: 'GET_CAST_BY_ID_SUCCESS', payload: true });
+export const getCastById = (id, role) => async (dispatch) => {
+    dispatch({ type: 'LOADING_CAST', payload: true });
   
     try {
       const response = await axios.get(`http://localhost:7000/casts/${id}`);
       const { data } = response; // Assuming cast data is directly in response.data
-      dispatch({ type: 'GET_CAST_BY_ID', payload: data });
+  
+      // Include role in the cast data
+      const castWithRole = { ...data, role };
+      dispatch({ type: 'GET_CAST_BY_ID', payload: castWithRole });
       dispatch({ type: 'LOADING_CAST', payload: false });
+      return { success: true, payload: castWithRole }; // Return success and payload
     } catch (error) {
       console.error('Error getting cast:', error);
       dispatch({ type: 'LOADING_CAST', payload: false });
+      return { success: false, error }; // Return failure and error
     }
   };
-
 
 export const AddCast = (ReqObj) => async (dispatch) => {
     dispatch({ type: "LOADING", payload: true });

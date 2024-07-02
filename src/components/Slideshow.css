@@ -7,6 +7,8 @@
   width: 100%;
   height: 100%;
   z-index: -1; /* Ensure the slideshow stays behind other content */
+  font-family: 'Josefin Sans', sans-serif; /* Use Josefin Sans as the primary font */
+
 }
 
 .slide {

@@ -11,7 +11,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 
 const pages = [
   { label: 'Home', href: '/' },
@@ -44,9 +43,9 @@ function ResponsiveAppBar() {
   return (
     <AppBar position="static" sx={{ 
       bgcolor: 'rgba(0, 0, 0, 0.5)',
-       boxShadow: 'none'  ,
-          backdropFilter: 'blur(10px)',
-     }}>
+      boxShadow: 'none',
+      backdropFilter: 'blur(10px)',
+    }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -57,12 +56,10 @@ function ResponsiveAppBar() {
             sx={{
               mr: 2,
               flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
+              fontFamily: 'Josefin Sans, sans-serif', // Ensure correct font-family declaration
               letterSpacing: '.1rem',
               color: 'inherit',
               textDecoration: 'none',
-         
             }}
           >
             filmkrd
