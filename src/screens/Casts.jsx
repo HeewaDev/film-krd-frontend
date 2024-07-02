@@ -89,7 +89,7 @@ const Casts = () => {
                   className="card-meta"
                   avatar={<Avatar src={cast.img} />}
                   title={cast.name}
-                  description={`Role: ${cast.role}, Bio: ${cast.bio}`}
+                  description={`Bio: ${cast.description}`}
                 />
                 <div className="card-actions">
                   <button className="btn">
