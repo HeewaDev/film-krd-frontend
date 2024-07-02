@@ -60,6 +60,47 @@ export const getCastsByFilmId = (filmId) => async (dispatch) => {
   }
 };
 
+// Action to fetch companies by film ID
+export const getCompaniesByFilmId = (filmId) => async (dispatch) => {
+  dispatch({ type: 'LOADING', payload: true });
+
+  try {
+    const response = await axios.get(`http://localhost:7000/film_companies?film_id=${filmId}`);
+    const companies = response.data; // Assuming response is like [{"film_id":1,"company_id":1,"role":"Production"}, {"film_id":1,"company_id":2,"role":"Distribution"}]
+
+    // Map through companies to fetch individual company details
+    const companyDetailsPromises = companies.map(async (companyInfo) => {
+      try {
+        // Dispatch action to fetch company details (adjust as per your structure)
+        const companyResponse = await fetchCompanyDetailsById(companyInfo.company_id);
+        return companyResponse; // Assuming company data is directly in response
+      } catch (error) {
+        console.error(`Error getting company with ID ${companyInfo.company_id}:`, error);
+        return null; // Handle error gracefully or as needed
+      }
+    });
+
+    // Resolve all promises and dispatch the result
+    const companyDetails = await Promise.all(companyDetailsPromises);
+    dispatch({ type: 'GET_COMPANIES_BY_FILM_ID', payload: companyDetails });
+    dispatch({ type: 'LOADING', payload: false });
+  } catch (error) {
+    console.error(`Error getting Companies for Film ID ${filmId}:`, error);
+    dispatch({ type: 'LOADING', payload: false });
+  }
+};
+
+// Function to fetch company details by ID (example function, adjust as per your backend structure)
+const fetchCompanyDetailsById = async (companyId) => {
+  try {
+    const response = await axios.get(`http://localhost:7000/companies/${companyId}`);
+    return response.data; // Assuming company details are directly in response.data
+  } catch (error) {
+    console.error(`Error fetching company details for ID ${companyId}:`, error);
+    return null; // Handle error gracefully or as needed
+  }
+};
+
 export const addFilm = (reqObj) => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
 

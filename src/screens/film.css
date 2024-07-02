@@ -110,3 +110,91 @@ body {
     margin-top: 5px;
     font-style: italic;
 }
+
+.film-companies {
+    grid-column: 1 / span 2; /* Span both columns */
+    grid-row: 4;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.film-companies-title {
+    margin-bottom: 10px;
+}
+
+.film-companies-grid {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.film-company {
+    flex: 0 0 auto;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #000000;
+    padding: 10px;
+    background-color: #00000046; /* Black background */
+}
+
+.company-logo {
+    width: 100%;
+    height: 150px; /* Set a fixed height for consistency */
+    object-fit: cover;
+}
+
+.company-name {
+    margin-top: 10px;
+}
+
+.company-role {
+    margin-top: 5px;
+    font-style: italic;
+}
+
+
+.film-crews {
+    grid-column: 1 / span 2; /* Span both columns */
+    grid-row: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.film-crews-title {
+    margin-bottom: 10px;
+}
+
+.film-crews-grid {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.film-crew {
+    flex: 0 0 auto;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #000000;
+    padding: 10px;
+    background-color: #00000046; /* Black background */
+}
+
+.crew-image {
+    width: 100%;
+    height: 150px; /* Set a fixed height for consistency */
+    object-fit: cover;
+}
+.crew-name {
+    margin-top: 10px;
+}
+
+.crew-role {
+    margin-top: 5px;
+    font-style: italic;
+}

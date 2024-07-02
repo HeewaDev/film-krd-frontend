@@ -3,28 +3,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import DefaultLayout from "../components/DefaultLayout";
 import { CircularProgress, Typography, Box } from "@mui/material";
-import { getFilmById, getCastsByFilmId } from "../Redux/Actions/film.action";
+import { getFilmById, getCastsByFilmId, getCompaniesByFilmId } from "../Redux/Actions/film.action";
 import { getCastById } from "../Redux/Actions/casts.action";
+import { getCrewsByFilmId } from "../Redux/Actions/crew.action"; // Import getCrewsByFilmId action
 
 import "./film.css";
 
 const Film = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { film, casts, loading } = useSelector((state) => state.FilmsReducer);
+  const { film, casts, companies,crew, loading } = useSelector((state) => state.FilmsReducer);
 
   useEffect(() => {
     dispatch(getFilmById(id));
     dispatch(getCastsByFilmId(id));
+    dispatch(getCompaniesByFilmId(id));
+    dispatch(getCrewsByFilmId(id)); // Fetch crews by film ID
   }, [dispatch, id]);
 
-  useEffect(() => {
-    if (casts && casts.length > 0) {
-      casts.forEach((cast) => {
-        dispatch(getCastById(cast.casts_id));
-      });
-    }
-  }, [casts, dispatch]);
 
   if (loading) {
     return <CircularProgress />;
@@ -42,15 +38,14 @@ const Film = () => {
   };
 
   const embedUrl = getEmbedUrl(film.trailerurl);
-
   return (
     <Box className="film-container">
-      <Box
-        className="film-background"
+      <Box className="film-background"
         sx={{
           backgroundImage: `url(${film.wallpaper})`,
         }}
       />
+
       <DefaultLayout />
       <Box className="film-grid">
         <Box className="film-details">
@@ -132,6 +127,72 @@ const Film = () => {
             )}
           </Box>
         </Box>
+        
+        <Box className="film-companies">
+          <Typography variant="h4" className="film-companies-title">
+            Companies
+          </Typography>
+          <Box className="film-companies-grid">
+            {companies?.length === 0 ? (
+              <Typography variant="body1">No companies found for this film.</Typography>
+            ) : (
+              companies?.map((company) => (
+                <Box className="film-company" key={company.company_id}>
+                  {company.name && (
+                    <>
+                      <img
+                        className="company-logo"
+                        src={company.img}
+                        alt={company.name}
+                      />
+                      <Typography variant="body1" className="company-name">
+                        {company.name}
+                      </Typography>
+                    </>
+                  )}
+                  <Typography variant="body1" className="company-role">
+                    Role: {company.type}
+                  </Typography>
+                </Box>
+              ))
+            )}
+          </Box>
+        </Box>
+
+        <Box className="film-crews">
+          <Typography variant="h4" className="film-crews-title">
+            Crews
+          </Typography>
+          <Box className="film-crews-grid">
+            {crew?.length === 0 ? (
+              <Typography variant="body1">No crews found for this film.</Typography>
+            ) : (
+              crew?.map((crew) => (
+                <Box className="film-crew" key={crew.crew_id}>
+                  {crew.name && (
+                    <>
+                     <img
+                        className="crew-image"
+                        src={crew.img} // Ensure img is fetched from Redux state
+                        alt={crew.name}
+                      />
+                      <Typography variant="body1" className="crew-name">
+                        {crew.name}
+                      </Typography> 
+                      <Typography variant="body1" className="crew-role">
+                        {crew.role}
+                      </Typography>
+                      </>
+                    )}
+                      
+                   
+        
+                </Box>
+              ))
+            )}
+          </Box>
+        </Box>
+        
         <Box className="film-poster-container">
           <img
             className="film-poster"

@@ -8,6 +8,8 @@ const initialState = {
   loading: false,
   error: null,
   cast: [], // Initialize casts state
+  crews: [], // Ensure crews is initialized
+
 };
 
 const FilmsReducer = (state = initialState, action) => {
@@ -40,15 +42,29 @@ const FilmsReducer = (state = initialState, action) => {
         ...state,
         loading: false,
       };
+    case 'GET_COMPANIES_BY_FILM_ID':
+      return {
+        ...state,
+       companies: action.payload
+      };
+
+      case 'GET_CREWS_BY_FILM_ID':
+        return {
+          ...state,
+         crew: action.payload
+        };
+
     case 'ERROR':
       return {
         ...state,
         error: action.payload,
         loading: false,
       };
+
     default:
       return state;
   }
+    
 };
 
 export default FilmsReducer;
