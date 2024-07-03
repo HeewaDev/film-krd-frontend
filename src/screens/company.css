@@ -1,0 +1,52 @@
+body {
+    font-family: 'Josefin Sans', sans-serif; /* Use Josefin Sans as the primary font */
+    background-color: rgb(0, 0, 0); /* Choose your preferred colder color */
+}
+  
+.company-container {
+    position: relative;
+    min-height: 100vh;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.company-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3; /* 30% opacity */
+    z-index: -1; /* Positioned behind the content */
+}
+
+.company-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Two columns: details and logo */
+    gap: 20px;
+    padding: 20px;
+    z-index: 1; /* Positioned above the background */
+}
+
+.company-details {
+    grid-column: 1;
+}
+
+.company-logo-container {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column; /* Stack logo */
+    align-items: center;
+}
+
+.company-logo {
+    width: 100%;
+    max-width:400px;
+    height: auto;
+    border: 2px solid #000; /* Optional: Border for the logo */
+    background-color: #fff; /* Optional: Background color for logo */
+}

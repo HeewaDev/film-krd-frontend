@@ -19,7 +19,19 @@ export const getAllCompanies = () => async (dispatch) => {
 // Other actions (AddCompany, EditCompany, DeleteCompany) remain unchanged
 
 
-
+export const getCompanyById = (id) => async (dispatch) => {
+    dispatch({ type: 'LOADING', payload: true });
+  
+    try {
+      const response = await axios.get(`http://localhost:7000/companies/${id}`);
+      dispatch({ type: 'GET_COMPANY_BY_ID', payload: response.data });
+      dispatch({ type: 'LOADING', payload: false });
+    } catch (error) {
+      message.error('Error getting company');
+      dispatch({ type: 'LOADING', payload: false });
+    }
+  };
+  
 
 
 export const AddCompany = (ReqObj) => async (dispatch) => {

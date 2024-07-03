@@ -25,6 +25,7 @@ export const getShootingLocationById = (id) => async (dispatch) => {
     const location = response.data;
     dispatch({ type: 'GET_SHOOTING_LOCATION_BY_ID', payload: location });
     dispatch({ type: 'LOADING_SHOOTING_LOCATIONS', payload: false });
+    console.log('Location:', location);
   } catch (error) {
     console.error(`Error getting shooting location with ID ${id}:`, error);
     dispatch({ type: 'LOADING_SHOOTING_LOCATIONS', payload: false });

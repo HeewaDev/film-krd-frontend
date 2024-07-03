@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import DefaultLayout from "../components/DefaultLayout";
 import { CircularProgress, Typography, Box } from "@mui/material";
 import { getFilmById, getCastsByFilmId, getCompaniesByFilmId } from "../Redux/Actions/film.action";
-import { getCastById } from "../Redux/Actions/casts.action";
 import { getCrewsByFilmId } from "../Redux/Actions/crew.action"; // Import getCrewsByFilmId action
 
 import "./film.css";

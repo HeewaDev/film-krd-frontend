@@ -3,6 +3,7 @@ const initialState = {
     shootingLocation: null,
     loading: false,
     error: null,
+    location: []
   };
   
   const ShootingLocationsReducer = (state = initialState, action) => {
@@ -21,7 +22,7 @@ const initialState = {
       case 'GET_SHOOTING_LOCATION_BY_ID':
         return {
           ...state,
-          shootingLocation: action.payload,
+          location: action.payload,
           loading: false,
         };
       case 'CREATE_SHOOTING_LOCATION':
