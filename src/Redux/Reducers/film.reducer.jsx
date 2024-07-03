@@ -9,7 +9,8 @@ const initialState = {
   error: null,
   cast: [], // Initialize casts state
   crews: [], // Ensure crews is initialized
-
+  companies: [] // Ensure companies is initialized
+  
 };
 
 const FilmsReducer = (state = initialState, action) => {

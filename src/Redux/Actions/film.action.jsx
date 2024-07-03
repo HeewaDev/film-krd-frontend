@@ -65,6 +65,7 @@ export const getCompaniesByFilmId = (filmId) => async (dispatch) => {
   dispatch({ type: 'LOADING', payload: true });
 
   try {
+    console.log('Fetching companies for Film ID:', filmId)
     const response = await axios.get(`http://localhost:7000/film_companies?film_id=${filmId}`);
     const companies = response.data; // Assuming response is like [{"film_id":1,"company_id":1,"role":"Production"}, {"film_id":1,"company_id":2,"role":"Distribution"}]
 

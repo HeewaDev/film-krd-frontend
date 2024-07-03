@@ -15,6 +15,7 @@ const Film = () => {
   const { film, casts, companies,crew, loading } = useSelector((state) => state.FilmsReducer);
 
   useEffect(() => {
+    console.log("Film ID: ", id);
     dispatch(getFilmById(id));
     dispatch(getCastsByFilmId(id));
     dispatch(getCompaniesByFilmId(id));
