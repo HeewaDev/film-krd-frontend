@@ -74,12 +74,10 @@ const ShootingLocation = () => {
           <Typography variant="body1" className="location-detail">
             <strong>Country:</strong> {location.country}
           </Typography>
-          <Typography variant="body1" className="location-detail">
+          <Typography variant="body1" className="location-detail-desc">
             <strong>Description:</strong> {location.description}
           </Typography>
-          <Typography variant="body1" className="location-detail">
-            <strong>Coordinates:</strong> {location.location}
-          </Typography>
+         
         </Box>
         <Box className="location-media-container">
           {location.img && location.img.length > 0 && location.img.map((imageUrl, index) => (
@@ -98,8 +96,10 @@ const ShootingLocation = () => {
               allowFullScreen
             />
           )}
-        </Box>
-        <Box className="location-map-container">
+                  <Box className="location-map-container">
+                  <Typography variant="body1" className="location-detail">
+            <strong>Coordinates:</strong> {location.location}
+          </Typography>
           {coordinates[0] !== 0 && coordinates[1] !== 0 && (
             <MapContainer center={coordinates} zoom={13} scrollWheelZoom={false} className="location-map">
               <TileLayer
@@ -110,8 +110,14 @@ const ShootingLocation = () => {
                 <Popup>{location.name}</Popup>
               </Marker>
             </MapContainer>
-          )}
+       
+    
+  )}
+      
+</Box>
         </Box>
+
+
       </Box>
     </Box>
   );
